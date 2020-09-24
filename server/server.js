@@ -38,7 +38,7 @@ app.put('/usuario/:id', function(req, res) {
 
 
 app.get('/', function(req, res) {
-    res.json('Hola Mundo');
+    res.json('Hola Mundo desde el /');
 });
 
 
