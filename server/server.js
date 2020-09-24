@@ -33,8 +33,17 @@ app.put('/usuario/:id', function(req, res) {
 
     let clave = req.params.id;
 
-    res.json(clave);
+    res.json(`Se ha actualizado el usuario de código ${clave}`);
 });
+
+
+app.delete('/usuario/:id', function(req, res) {
+
+    let clave = req.params.id;
+    res.json(`Se ha borrado el usuario de código ${clave}`);
+});
+
+
 
 
 app.get('/', function(req, res) {
