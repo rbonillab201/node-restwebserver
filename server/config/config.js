@@ -19,7 +19,7 @@ let urlString;
 if (process.env.NODE_ENV === 'dev') {
     urlString = 'mongodb://localhost:27017/cafe';
 } else {
-    urlString = 'mongodb+srv://renatio:zNLOC8hmcIv2eoV6@cluster0.epper.mongodb.net/cafe';
+    urlString = process.env.DBURI; // DBURI es una variable configurada a nivel de Heroku mediante heroku config:set DBURI="VALOR"
 }
 
 process.env.URLDB = urlString;
