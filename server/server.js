@@ -1,55 +1,28 @@
 require('./config/config');
 const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const e = require('express');
+
+const app = express();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+app.use(require('./routes/usuario'));
+mongoose.connect(process.env.URLDB, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+}, (err, resp) => {
+    console.log(process.env.URLDB);
+    if (err) throw err;
 
-app.get('/usuario', function(req, res) {
-    res.json('Hola Mundo');
+    console.log(`Se la logrado conectar con exito ${resp}`);
 });
-
-app.post('/usuario', function(req, res) {
-    let datos = req.body;
-
-    if (datos.nombre === undefined) {
-        res.status(400).json({
-            mensaje: 'El nombre es obligatorio',
-            ok: false
-        });
-    } else {
-        res.json({
-            persona: datos
-        });
-    }
-
-});
-
-app.put('/usuario/:id', function(req, res) {
-
-    let clave = req.params.id;
-
-    res.json(`Se ha actualizado el usuario de código ${clave}`);
-});
-
-
-app.delete('/usuario/:id', function(req, res) {
-
-    let clave = req.params.id;
-    res.json(`Se ha borrado el usuario de código ${clave}`);
-});
-
-
-
-
-app.get('/', function(req, res) {
-    res.json('Hola Mundo desde el /');
-});
-
 
 app.listen(process.env.PORT, () => {
     console.log(`Escuchando en el puerto  ${process.env.PORT} `);
