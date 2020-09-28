@@ -18,6 +18,7 @@ mongoose.connect(process.env.URLDB, {
     useCreateIndex: true,
     useUnifiedTopology: true
 }, (err, resp) => {
+    console.log("Base conectado");
     console.log(process.env.URLDB);
     if (err) throw err;
 
