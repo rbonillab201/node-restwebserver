@@ -21,7 +21,6 @@ app.get('/usuario', validaToken, (req, res) => {
         estado: true
     };
 
-
     Usuario.find(estadoActivo, 'nombre email role google estado')
         .skip(salto)
         .limit(limite)
