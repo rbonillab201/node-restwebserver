@@ -93,7 +93,7 @@ app.delete('/usuarioU/:id', [validaToken, validaRoleAdmin], (req, res) => {
     //  let body = _.pick(req.body, ['estado']); esta es una forma
     let estadoFalse = {
         estado: false
-    }
+    };
 
     Usuario.findByIdAndUpdate(id, estadoFalse, { new: true }, (err, usuarioDB) => {
         if (err) {
