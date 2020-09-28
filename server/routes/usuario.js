@@ -2,9 +2,15 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const Usuario = require('../models/usuario');
+const { validaToken, validaRoleAdmin } = require('../middleware/autentication');
 app = express();
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', validaToken, (req, res) => {
+
+    /* validando el valor que se ha pasado desde el validaToken
+    return res.json({
+        usuario: req.usuario
+    }) */
 
     let limite = req.query.limite || 5;
     let salto = req.query.salto || 5;
@@ -14,6 +20,7 @@ app.get('/usuario', function(req, res) {
     let estadoActivo = {
         estado: true
     };
+
 
     Usuario.find(estadoActivo, 'nombre email role google estado')
         .skip(salto)
@@ -37,7 +44,7 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [validaToken, validaRoleAdmin], (req, res) => {
     let datos = req.body;
 
     let usuario = new Usuario({
@@ -61,7 +68,7 @@ app.post('/usuario', function(req, res) {
     });
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [validaToken, validaRoleAdmin], (req, res) => {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -82,7 +89,7 @@ app.put('/usuario/:id', function(req, res) {
     //  res.json(`Se ha actualizado el usuario de código ${id}`);
 });
 
-app.delete('/usuarioU/:id', function(req, res) {
+app.delete('/usuarioU/:id', [validaToken, validaRoleAdmin], (req, res) => {
     let id = req.params.id;
     //  let body = _.pick(req.body, ['estado']); esta es una forma
     let estadoFalse = {
@@ -113,7 +120,7 @@ app.delete('/usuarioU/:id', function(req, res) {
     });
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', validaToken, (req, res) => {
 
     let id = req.params.id;
 
