@@ -16,6 +16,7 @@ app.post('/login', (req, resp) => {
         if (err) {
             return resp.status(500).json({
                 ok: false,
+                url: process.env.URLDB,
                 err
             });
         }
@@ -24,6 +25,7 @@ app.post('/login', (req, resp) => {
             return resp.status(400).json({
 
                 ok: false,
+                url: process.env.URLDB,
                 err: {
                     message: '(Usuario) y contraseña no son válidos'
                 }
@@ -33,6 +35,7 @@ app.post('/login', (req, resp) => {
 
                 return resp.status(400).json({
                     ok: false,
+                    url: process.env.URLDB,
                     err: {
                         message: 'Usuario y (contraseña) no son válidos'
                     }
@@ -46,6 +49,7 @@ app.post('/login', (req, resp) => {
 
         resp.json({
             ok: true,
+            url: process.env.URLDB,
             usuario: usuarioDB,
             token
         });
