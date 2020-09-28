@@ -33,4 +33,4 @@ process.env.TOKEN_CADUCA = 30 * 30 * 24 * 30;
 // ==========================
 // seed Token
 // ==========================
-process.env.SEED_TOKEN = process.env.SEED_TOKEN || 'esta-es-una-prueba-%^&';
+process.env.SEED_TOKEN = process.env.SEED_TOKEN || "esta-es-una-prueba-%^&";
