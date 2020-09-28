@@ -18,11 +18,11 @@ mongoose.connect(process.env.URLDB, {
     useCreateIndex: true,
     useUnifiedTopology: true
 }, (err, resp) => {
-    console.log("Base conectado");
-    console.log(process.env.URLDB);
+    //   console.log("Base conectado");
+    //  console.log(process.env.URLDB);
     if (err) throw err;
 
-    console.log(`Se la logrado conectar con exito ${resp}`);
+    console.log('Base de datos ONLINE');
 });
 
 app.listen(process.env.PORT, () => {

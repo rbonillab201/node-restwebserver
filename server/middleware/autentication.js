@@ -6,21 +6,21 @@ const jwt = require('jsonwebtoken');
 
 let validaToken = (req, resp, next) => {
     let token = req.get('token');
-    jwt.verify(token, process.env.SEED_TOKEN, (err, decoded) => {
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
         if (err) {
             return resp.status(401).json({
                 ok: false,
                 err
             });
         }
-        console.log(decoded.usuario);
+        //       console.log(decoded.usuario);
         req.usuario = decoded.usuario;
         next();
     });
 };
 
 let validaRoleAdmin = (req, resp, next) => {
-    console.log(' -->  ' + req.usuario);
+    //  console.log(' -->  ' + req.usuario);
 
     if (req.usuario.role !== 'ADMIN_ROLE') {
         return resp.status(401).json({

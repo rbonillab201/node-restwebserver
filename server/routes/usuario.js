@@ -110,7 +110,7 @@ app.delete('/usuarioU/:id', [validaToken, validaRoleAdmin], (req, res) => {
                 }
             });
         }
-        console.log(usuarioDB);
+        //      console.log(usuarioDB);
 
         res.json({
             ok: true,
